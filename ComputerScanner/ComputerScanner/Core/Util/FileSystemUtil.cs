@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 
 namespace ComputerScanner
 {
@@ -25,15 +26,22 @@ namespace ComputerScanner
         }
 
         //获取指定目录文件信息
-        public static Dictionary<String, FileInfo> GetDirInfo(String dirPath)
+        public static Dictionary<String, FileInfo> GetDirInfo(String dirPath, List<String> errDirs)
         {
             Dictionary<String, FileInfo> searchResult = new Dictionary<String, FileInfo>();
             if (Directory.Exists(dirPath))
             {
-                DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
-                foreach (FileInfo fileInfo in dirInfo.GetFiles("*", SearchOption.AllDirectories))
+                Queue<DirectoryInfo> searchQueue = new Queue<DirectoryInfo>();
+                searchQueue.Enqueue(new DirectoryInfo(dirPath));
+                while (searchQueue.Count > 0)
                 {
-                    searchResult.Add(fileInfo.FullName, fileInfo);
+                    DirectoryInfo searchDirInfo = searchQueue.Dequeue();
+                    try
+                    {
+                        foreach (DirectoryInfo subDirInfo in searchDirInfo.GetDirectories()) searchQueue.Enqueue(subDirInfo);
+                        foreach (FileInfo fileInfo in searchDirInfo.GetFiles()) searchResult.Add(fileInfo.FullName, fileInfo);
+                    }
+                    catch (Exception) { errDirs.Add(searchDirInfo.FullName); }
                 }
             }
             return searchResult;
