@@ -1,4 +1,9 @@
-﻿using System;
+﻿/**
+ *  @作者 Tiger
+ *  @创建 2019-01-09 21:15:34
+ *  @说明 主窗口
+ **/
+using System;
 using System.Windows.Forms;
 
 namespace ComputerScanner
@@ -12,17 +17,14 @@ namespace ComputerScanner
         //定时器
         private void MainFormTimer_Tick(object sender, EventArgs e)
         {
-            String newMsg = String.Format("{0}{1}", String.Join(Environment.NewLine, MessageManager.Get().ToArray()), Environment.NewLine);
-            if (!String.IsNullOrWhiteSpace(newMsg))
+            String statusText = MessageManager.Get();
+            if (!String.IsNullOrWhiteSpace(statusText))
             {
-                RichTextBoxOutputResult.Text += newMsg;
-                RichTextBoxOutputResult.Focus();
-                RichTextBoxOutputResult.Select(RichTextBoxOutputResult.Text.Length, 0);
-                RichTextBoxOutputResult.ScrollToCaret();
+                ProgressBar.Text = statusText;
             }
         }
 
         //扫描磁盘
-        private void ToolStripSearchDisk_Click(object sender, EventArgs e) { SearchDiskAction.Instance.Excute(); }
+        private void ButtonSearchDisk_Click(object sender, EventArgs e) { SearchDiskAction.Instance.Excute(); }
     }
 }

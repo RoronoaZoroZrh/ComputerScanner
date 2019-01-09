@@ -1,4 +1,9 @@
-﻿using System;
+﻿/**
+ *  @作者 Tiger
+ *  @创建 2019-01-09 21:17:45
+ *  @说明 扫描磁盘
+ **/
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -8,8 +13,9 @@ namespace ComputerScanner
     public class SearchDiskAction
     {
         private static SearchDiskAction mInstance; //实例
-        private delegate void SearchDiskDelegate(); //委托
         private List<String> mErrDirs = new List<String>(); //出错目录
+        private List<DirectoryInfo> mDirs = new List<DirectoryInfo>(); //所有目录
+        private delegate void SearchDiskDelegate(); //委托
 
         //获取实例
         public static SearchDiskAction Instance { get { return mInstance ?? (mInstance = new SearchDiskAction()); } }
@@ -23,7 +29,7 @@ namespace ComputerScanner
             SearchDiskDelegate searchDiskDelegate = new SearchDiskDelegate(ExcuteImpl);
             searchDiskDelegate.BeginInvoke((callback) =>
             {
-                MessageManager.Add(String.Format("{0} {1}", DateTime.Now.ToLocalTime(), "结束扫描磁盘"));
+                MessageManager.Add(String.Format("完成磁盘扫描"));
                 searchDiskDelegate.EndInvoke(callback);
             }, null);
         }
@@ -31,10 +37,9 @@ namespace ComputerScanner
         //执行
         private void ExcuteImpl()
         {
-            MessageManager.Add(String.Format("{0} {1}", DateTime.Now.ToLocalTime(), "开始扫描磁盘"));
             foreach (String disk in FileSystemUtil.GetDisks())
             {
-                MessageManager.Add(String.Format("{0} {1}{2}", DateTime.Now.ToLocalTime(), "开始扫描磁盘", disk));
+                MessageManager.Add(String.Format("扫描{0}中...", disk.TrimEnd('\\').TrimEnd(':')));
                 Queue<DirectoryInfo> searchQueue = new Queue<DirectoryInfo>(new List<DirectoryInfo> { new DirectoryInfo(disk) });
                 while (searchQueue.Count > 0)
                 {
@@ -42,12 +47,9 @@ namespace ComputerScanner
                     try
                     {
                         foreach (DirectoryInfo dirInfo in FileSystemUtil.GetSubDirectories(searchDirInfo.FullName)) searchQueue.Enqueue(dirInfo);
+                        mDirs.Add(searchDirInfo);
                     }
-                    catch (Exception exception)
-                    {
-                        mErrDirs.Add(searchDirInfo.FullName);
-                        MessageManager.Add(String.Format("访问目录{0}出错，出错信息{1}", searchDirInfo.FullName, exception.Message));
-                    }
+                    catch (Exception) { mErrDirs.Add(searchDirInfo.FullName); }
                 }
             }
         }

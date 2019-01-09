@@ -1,4 +1,9 @@
-﻿using System;
+﻿/**
+ *  @作者 Tiger
+ *  @创建 2019-01-09 21:16:13
+ *  @说明 消息管理
+ **/
+using System;
 using System.Collections.Generic;
 
 namespace ComputerScanner
@@ -6,22 +11,19 @@ namespace ComputerScanner
     //消息管理
     public class MessageManager
     {
-        private static List<String> mMessages = new List<String>(); //消息列表
+        private static Queue<String> mMessages = new Queue<String>(); //消息列表
 
         //添加消息
-        public static void Add(String message) { lock (mMessages) mMessages.Add(message); }
-
-        //添加消息
-        public static void Add(List<String> messages) { lock (mMessages) mMessages.AddRange(messages); }
+        public static void Add(String message) { lock (mMessages) mMessages.Enqueue(message); }
 
         //获取消息
-        public static List<String> Get()
+        public static String Get()
         {
             lock (mMessages)
             {
-                List<String> tar = new List<String>(mMessages);
-                mMessages.Clear();
-                return tar;
+                if (mMessages.Count > 0)
+                    return mMessages.Dequeue();
+                return default(String);
             }
         }
     }

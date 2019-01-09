@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar2">
+      <HintPath>DLL\DevComponents.DotNetBar2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,6 +50,7 @@
     <Compile Include="Core\Action\SearchDiskAction.cs" />
     <Compile Include="Core\MessageManager.cs" />
     <Compile Include="Core\Util\FileSystemUtil.cs" />
+    <Compile Include="Core\Util\XmlUtil.cs" />
     <Compile Include="GUI\ComputerScanner.cs">
       <SubType>Form</SubType>
     </Compile>
