@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Action\SearchDiskAction.cs" />
+    <Compile Include="Core\MessageManager.cs" />
     <Compile Include="Core\Util\FileSystemUtil.cs" />
     <Compile Include="GUI\ComputerScanner.cs">
       <SubType>Form</SubType>

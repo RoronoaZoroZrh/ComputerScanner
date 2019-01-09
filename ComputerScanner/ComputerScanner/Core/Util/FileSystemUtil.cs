@@ -3,11 +3,11 @@
  *  @创建 2019-01-08 22:58:51
  *  @说明 封装.Net文件操作
  *  @更新 2019-1-9 09:53:43 增加接口GetDisks
+ *  @更新 2019-1-9 16:46:22 增加接口GetSubDirectories
  **/
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Forms;
 
 namespace ComputerScanner
 {
@@ -25,26 +25,24 @@ namespace ComputerScanner
             return searchResult;
         }
 
-        //获取指定目录文件信息
-        public static Dictionary<String, FileInfo> GetDirInfo(String dirPath, List<String> errDirs)
+        //获取子目录
+        public static DirectoryInfo[] GetSubDirectories(String dirPath)
         {
-            Dictionary<String, FileInfo> searchResult = new Dictionary<String, FileInfo>();
             if (Directory.Exists(dirPath))
             {
-                Queue<DirectoryInfo> searchQueue = new Queue<DirectoryInfo>();
-                searchQueue.Enqueue(new DirectoryInfo(dirPath));
-                while (searchQueue.Count > 0)
-                {
-                    DirectoryInfo searchDirInfo = searchQueue.Dequeue();
-                    try
-                    {
-                        foreach (DirectoryInfo subDirInfo in searchDirInfo.GetDirectories()) searchQueue.Enqueue(subDirInfo);
-                        foreach (FileInfo fileInfo in searchDirInfo.GetFiles()) searchResult.Add(fileInfo.FullName, fileInfo);
-                    }
-                    catch (Exception) { errDirs.Add(searchDirInfo.FullName); }
-                }
+                return new DirectoryInfo(dirPath).GetDirectories();
             }
-            return searchResult;
+            return null;
+        }
+
+        //获取子文件
+        public static FileInfo[] GetSubFileInfos(String dirPath)
+        {
+            if (Directory.Exists(dirPath))
+            {
+                return new DirectoryInfo(dirPath).GetFiles();
+            }
+            return null;
         }
     }
 }
