@@ -23,6 +23,9 @@ namespace ComputerScanner
         //获取出错目录
         public List<String> GetErrDirs() { return mErrDirs; }
 
+        //获取所有目录
+        public List<DirectoryInfo> GetDirs() { return mDirs; }
+
         //执行
         public void Excute()
         {
@@ -37,10 +40,13 @@ namespace ComputerScanner
         //执行
         private void ExcuteImpl()
         {
-            foreach (String disk in FileSystemUtil.GetDisks())
+            List<String> disks = FileSystemUtil.GetDisks();
+            for (int i = 0; i < disks.Count; ++i)
             {
-                MessageManager.Add(String.Format("扫描{0}中...", disk.TrimEnd('\\').TrimEnd(':')));
-                Queue<DirectoryInfo> searchQueue = new Queue<DirectoryInfo>(new List<DirectoryInfo> { new DirectoryInfo(disk) });
+                MessageManager.Add(String.Format("扫描{0}盘中...", disks[i].TrimEnd('\\').TrimEnd(':')));
+                ProgressManager.Set(i, disks.Count);
+
+                Queue<DirectoryInfo> searchQueue = new Queue<DirectoryInfo>(new List<DirectoryInfo> { new DirectoryInfo(disks[i]) });
                 while (searchQueue.Count > 0)
                 {
                     DirectoryInfo searchDirInfo = searchQueue.Dequeue();
@@ -52,6 +58,7 @@ namespace ComputerScanner
                     catch (Exception) { mErrDirs.Add(searchDirInfo.FullName); }
                 }
             }
+            ProgressManager.Set(disks.Count, disks.Count);
         }
     }
 }

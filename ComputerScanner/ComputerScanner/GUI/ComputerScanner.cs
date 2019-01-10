@@ -17,11 +17,10 @@ namespace ComputerScanner
         //定时器
         private void MainFormTimer_Tick(object sender, EventArgs e)
         {
-            String statusText = MessageManager.Get();
-            if (!String.IsNullOrWhiteSpace(statusText))
-            {
-                ProgressBar.Text = statusText;
-            }
+            String tarMsg = MessageManager.Get();
+            if (!String.IsNullOrWhiteSpace(tarMsg)) ProgressBar.Text = tarMsg;
+            ProgressBar.Value = ProgressManager.GetValue();
+            ProgressBar.Maximum = ProgressManager.GetMaxValue();
         }
 
         //扫描磁盘

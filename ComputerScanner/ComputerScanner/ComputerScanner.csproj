@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Core\Action\SearchDiskAction.cs" />
     <Compile Include="Core\MessageManager.cs" />
+    <Compile Include="Core\ProgressManager.cs" />
     <Compile Include="Core\Util\FileSystemUtil.cs" />
     <Compile Include="Core\Util\XmlUtil.cs" />
     <Compile Include="GUI\ComputerScanner.cs">
