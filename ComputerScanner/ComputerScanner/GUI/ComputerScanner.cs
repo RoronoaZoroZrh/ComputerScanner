@@ -25,5 +25,12 @@ namespace ComputerScanner
 
         //扫描磁盘
         private void ButtonSearchDisk_Click(object sender, EventArgs e) { SearchDiskAction.Instance.Excute(); }
+
+        //显示错误列表
+        private void ToolStripMenuItemShowErrDirs_Click(object sender, EventArgs e)
+        {
+            ListBoxResult.DataSource = SearchDiskAction.Instance.GetErrDirs();
+            ListBoxResult.Refresh();
+        }
     }
 }

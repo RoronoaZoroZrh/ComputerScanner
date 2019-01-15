@@ -36,6 +36,9 @@
             this.PanelExcute = new DevComponents.DotNetBar.PanelEx();
             this.ProgressBar = new DevComponents.DotNetBar.Controls.ProgressBarX();
             this.ListBoxResult = new System.Windows.Forms.ListBox();
+            this.ContextMenuStripFresh = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItemShowErrDirs = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextMenuStripFresh.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainFormTimer
@@ -114,6 +117,7 @@
             // 
             // ListBoxResult
             // 
+            this.ListBoxResult.ContextMenuStrip = this.ContextMenuStripFresh;
             this.ListBoxResult.Dock = System.Windows.Forms.DockStyle.Left;
             this.ListBoxResult.FormattingEnabled = true;
             this.ListBoxResult.ItemHeight = 12;
@@ -121,6 +125,20 @@
             this.ListBoxResult.Name = "ListBoxResult";
             this.ListBoxResult.Size = new System.Drawing.Size(880, 502);
             this.ListBoxResult.TabIndex = 6;
+            // 
+            // ContextMenuStripFresh
+            // 
+            this.ContextMenuStripFresh.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemShowErrDirs});
+            this.ContextMenuStripFresh.Name = "ContextMenuStripFresh";
+            this.ContextMenuStripFresh.Size = new System.Drawing.Size(181, 48);
+            // 
+            // ToolStripMenuItemShowErrDirs
+            // 
+            this.ToolStripMenuItemShowErrDirs.Name = "ToolStripMenuItemShowErrDirs";
+            this.ToolStripMenuItemShowErrDirs.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItemShowErrDirs.Text = "显示出错目录列表";
+            this.ToolStripMenuItemShowErrDirs.Click += new System.EventHandler(this.ToolStripMenuItemShowErrDirs_Click);
             // 
             // ComputerScanner
             // 
@@ -136,6 +154,7 @@
             this.Name = "ComputerScanner";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "电脑清理大师";
+            this.ContextMenuStripFresh.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -148,6 +167,8 @@
         private DevComponents.DotNetBar.PanelEx PanelExcute;
         private DevComponents.DotNetBar.Controls.ProgressBarX ProgressBar;
         private System.Windows.Forms.ListBox ListBoxResult;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuStripFresh;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemShowErrDirs;
     }
 }
 
