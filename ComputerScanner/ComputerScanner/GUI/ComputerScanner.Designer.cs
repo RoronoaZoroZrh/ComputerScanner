@@ -38,6 +38,9 @@
             this.ListBoxResult = new System.Windows.Forms.ListBox();
             this.ContextMenuStripFresh = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItemShowErrDirs = new System.Windows.Forms.ToolStripMenuItem();
+            this.ButtonCompareFiles = new DevComponents.DotNetBar.ButtonItem();
+            this.ToolStripMenuItemShowNewFiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemShowModifyFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextMenuStripFresh.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,10 +63,11 @@
             this.MenuBar.ContainerControlProcessDialogKey = true;
             this.MenuBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.MenuBar.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.ButtonSearchDisk});
+            this.ButtonSearchDisk,
+            this.ButtonCompareFiles});
             this.MenuBar.Location = new System.Drawing.Point(0, 0);
             this.MenuBar.Name = "MenuBar";
-            this.MenuBar.Size = new System.Drawing.Size(1141, 90);
+            this.MenuBar.Size = new System.Drawing.Size(1141, 95);
             this.MenuBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.MenuBar.TabIndex = 0;
             // 
@@ -90,9 +94,9 @@
             this.PanelExcute.CanvasColor = System.Drawing.SystemColors.Control;
             this.PanelExcute.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.PanelExcute.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelExcute.Location = new System.Drawing.Point(0, 90);
+            this.PanelExcute.Location = new System.Drawing.Point(0, 95);
             this.PanelExcute.Name = "PanelExcute";
-            this.PanelExcute.Size = new System.Drawing.Size(1141, 533);
+            this.PanelExcute.Size = new System.Drawing.Size(1141, 528);
             this.PanelExcute.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.PanelExcute.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.PanelExcute.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -109,7 +113,7 @@
             // 
             this.ProgressBar.BackgroundStyle.Class = "";
             this.ProgressBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ProgressBar.Location = new System.Drawing.Point(0, 90);
+            this.ProgressBar.Location = new System.Drawing.Point(0, 95);
             this.ProgressBar.Name = "ProgressBar";
             this.ProgressBar.Size = new System.Drawing.Size(1141, 31);
             this.ProgressBar.TabIndex = 5;
@@ -121,17 +125,19 @@
             this.ListBoxResult.Dock = System.Windows.Forms.DockStyle.Left;
             this.ListBoxResult.FormattingEnabled = true;
             this.ListBoxResult.ItemHeight = 12;
-            this.ListBoxResult.Location = new System.Drawing.Point(0, 121);
+            this.ListBoxResult.Location = new System.Drawing.Point(0, 126);
             this.ListBoxResult.Name = "ListBoxResult";
-            this.ListBoxResult.Size = new System.Drawing.Size(880, 502);
+            this.ListBoxResult.Size = new System.Drawing.Size(880, 497);
             this.ListBoxResult.TabIndex = 6;
             // 
             // ContextMenuStripFresh
             // 
             this.ContextMenuStripFresh.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItemShowErrDirs});
+            this.ToolStripMenuItemShowErrDirs,
+            this.ToolStripMenuItemShowNewFiles,
+            this.ToolStripMenuItemShowModifyFiles});
             this.ContextMenuStripFresh.Name = "ContextMenuStripFresh";
-            this.ContextMenuStripFresh.Size = new System.Drawing.Size(181, 48);
+            this.ContextMenuStripFresh.Size = new System.Drawing.Size(181, 92);
             // 
             // ToolStripMenuItemShowErrDirs
             // 
@@ -139,6 +145,30 @@
             this.ToolStripMenuItemShowErrDirs.Size = new System.Drawing.Size(180, 22);
             this.ToolStripMenuItemShowErrDirs.Text = "显示出错目录列表";
             this.ToolStripMenuItemShowErrDirs.Click += new System.EventHandler(this.ToolStripMenuItemShowErrDirs_Click);
+            // 
+            // ButtonCompareFiles
+            // 
+            this.ButtonCompareFiles.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.ButtonCompareFiles.Icon = ((System.Drawing.Icon)(resources.GetObject("ButtonCompareFiles.Icon")));
+            this.ButtonCompareFiles.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.ButtonCompareFiles.Name = "ButtonCompareFiles";
+            this.ButtonCompareFiles.SubItemsExpandWidth = 14;
+            this.ButtonCompareFiles.Text = "比较文件";
+            this.ButtonCompareFiles.Click += new System.EventHandler(this.ButtonCompareFiles_Click);
+            // 
+            // ToolStripMenuItemShowNewFiles
+            // 
+            this.ToolStripMenuItemShowNewFiles.Name = "ToolStripMenuItemShowNewFiles";
+            this.ToolStripMenuItemShowNewFiles.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItemShowNewFiles.Text = "显示新增文件";
+            this.ToolStripMenuItemShowNewFiles.Click += new System.EventHandler(this.ToolStripMenuItemShowNewFiles_Click);
+            // 
+            // ToolStripMenuItemShowModifyFiles
+            // 
+            this.ToolStripMenuItemShowModifyFiles.Name = "ToolStripMenuItemShowModifyFiles";
+            this.ToolStripMenuItemShowModifyFiles.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItemShowModifyFiles.Text = "显示修改文件";
+            this.ToolStripMenuItemShowModifyFiles.Click += new System.EventHandler(this.ToolStripMenuItemShowModifyFiles_Click);
             // 
             // ComputerScanner
             // 
@@ -169,6 +199,9 @@
         private System.Windows.Forms.ListBox ListBoxResult;
         private System.Windows.Forms.ContextMenuStrip ContextMenuStripFresh;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemShowErrDirs;
+        private DevComponents.DotNetBar.ButtonItem ButtonCompareFiles;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemShowNewFiles;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemShowModifyFiles;
     }
 }
 

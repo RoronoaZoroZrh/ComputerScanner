@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Action\CompareFileAction.cs" />
     <Compile Include="Core\Action\SearchDiskAction.cs" />
     <Compile Include="Core\MessageManager.cs" />
     <Compile Include="Core\ProgressManager.cs" />

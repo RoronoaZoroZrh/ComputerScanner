@@ -25,5 +25,16 @@ namespace ComputerScanner
                 pNode.AppendChild(tarNode);
             }
         }
+
+        //生成属性
+        public static void CreateAttribute(XmlNode pNode, String attrName, String attrValue = "")
+        {
+            if (pNode != null)
+            {
+                XmlAttribute tarAttr = pNode.OwnerDocument.CreateAttribute(attrName);
+                tarAttr.Value = attrValue;
+                pNode.Attributes.Append(tarAttr);
+            }
+        }
     }
 }
